@@ -31,11 +31,7 @@ expect <<EO
   expect eof
 EO
 
-#发送mysqld软件包,安装启服务
+#发送mysqld软件包
 scp /linux-soft/03/mysql/* root@${ip}:/root
+scp /root/ssh.sh root@${ip}:/root
 ssh -X root@"${ip}"
-tar -xf mysql-5.7.17.tar
-yum -y install mysql-community*.rpm
-systemctl restart mysqld
-systemctl enable mysqld
-
