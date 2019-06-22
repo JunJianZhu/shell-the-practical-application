@@ -34,6 +34,7 @@ expect <<EOF
   expect eof
 EOF
 
+<<<<<<< HEAD
 #真机发送mysqld软件包和MHA集群用的软件包
 scp /linux-soft/03/mysql/* root@${ip}:/root
 scp /root/ssh.sh root@${ip}:/root
@@ -53,4 +54,9 @@ expect <<EOF
   expect "#"  {send "systemctl enable mysqld\r"}
   expect eof
 EOF
+=======
+#发送mysqld软件包
+scp /linux-soft/03/mysql/* root@${ip}:/root
+scp /root/ssh.sh root@${ip}:/root
+>>>>>>> e99542c90cbe7bfefe7365650b33141342147ba4
 ssh -X root@"${ip}"
