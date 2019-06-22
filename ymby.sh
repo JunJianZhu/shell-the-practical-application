@@ -1,4 +1,5 @@
 #!/bin/bash
+#此脚本能实现一键部署nginx,mariadb,php
 yum -y install pcre-devel gcc openssl-devel
 yum -y install mariadb-server.x86_64  mariadb mariadb-devel php php-mysql php-fpm
 systemctl restart php-fpm

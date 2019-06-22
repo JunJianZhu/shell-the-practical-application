@@ -1,4 +1,5 @@
 #!/bin/bash
+#此脚本可一键生成虚拟机,并配置好IP地址、扩容、安装好mysql相应的包.并启动mysql
 read -p "输入虚拟机号码  " clone
 read -p "输入要配置的网卡/eth0/eth1/eth2/eth3/  " eth
 read -p "输入要配置的ip  " ip 
