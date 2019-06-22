@@ -1,4 +1,5 @@
-d -p "输入虚拟机号码  " clone
+#!/bin/bash
+read -p "输入虚拟机号码  " clone
 read -p "输入要配置的网卡/eth0/eth1/eth2/eth3/  " eth
 read -p "输入要配置的ip  " ip 
 read -p "要修改的主机名  " hs
@@ -34,7 +35,6 @@ expect <<EOF
   expect eof
 EOF
 
-<<<<<<< HEAD
 #真机发送mysqld软件包和MHA集群用的软件包
 scp /linux-soft/03/mysql/* root@${ip}:/root
 scp /root/ssh.sh root@${ip}:/root
@@ -54,9 +54,4 @@ expect <<EOF
   expect "#"  {send "systemctl enable mysqld\r"}
   expect eof
 EOF
-=======
-#发送mysqld软件包
-scp /linux-soft/03/mysql/* root@${ip}:/root
-scp /root/ssh.sh root@${ip}:/root
->>>>>>> e99542c90cbe7bfefe7365650b33141342147ba4
 ssh -X root@"${ip}"
