@@ -1,5 +1,5 @@
 #!/bin/bash
-#此脚本能实现一键配置ip和搭建yum
+#Function:一键配置ip和搭建yum
 read -p "请输入要配置的网卡(eth0/eth1/eth2/eth3):"  et
 read -p "请输入要配置的IP地址:"  ip
 read -p "请输入网关(可不填):" w
