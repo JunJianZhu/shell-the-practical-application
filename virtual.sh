@@ -16,8 +16,8 @@ fi
 #生成新的前端盘和xml配置文件
 qemu-img create -f qcow2 -b /var/lib/libvirt/images/.node_tedu.qcow2 /var/lib/libvirt/images/tedu_node${clone}.img 20G
 cp /var/lib/libvirt/images/.node_tedu.xml /etc/libvirt/qemu/"$clone".xml
-sed -in "2s!<name>node_tedu</name>!<name>${clone}</name>!" /etc/libvirt/qemu/"$clone".xml
-sed -in "26s!<source file='/var/lib/libvirt/images/node_tedu.img'/>!<source file='/var/lib/libvirt/images/tedu_node${clone}.img'/>!" /etc/libvirt/qemu/"$clone".xml
+sed -in "2s!.*!<name>${clone}</name>!" /etc/libvirt/qemu/"$clone".xml
+sed -in "26s!.*!<source file='/var/lib/libvirt/images/tedu_node${clone}.img'/>!" /etc/libvirt/qemu/"$clone".xml
 
 #virsh管理虚拟机配置ip,主机名
 virsh define /etc/libvirt/qemu/"$clone".xml
