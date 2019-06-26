@@ -15,11 +15,12 @@ else
   nmcli connection up "${et}"
 fi
 #清空yum仓库,以免影响正确配置
-rm -rf /etc/yum.repos.d/*
 read -p "yum库ftp的ip地址(例:192.168.4.254)(可不填):" i
 if [ -z $i ];then
   echo "不设置，yum可能会有点问题哦，建议yum repolist查看"
 else
+  rm -rf /etc/yum.repos.d/*
+  wd=`echo ${ip:8:1}`
 #配置yum仓库
-echo -e "[redhat]\nname=redhat\nbaseurl=ftp://192.168.4.254/centos-1804\nenabled=1\ngpgcheck=0\n[mon]\name=mon\nbaseurl=ftp://${i}/ceph/MON\ngpgcheck=0\n[osd]\nname=osd\nbaseurl=ftp://${i}/ceph/OSD\ngpgcheck=0\n[tools]\nname=tools\nbaseurl=ftp://${i}/ceph/Tools\ngpgcheck=0" > /etc/yum.repos.d/linux.repo
+  echo -e "[redhat]\nname=redhat\nbaseurl=ftp://192.168.${wd}.254/centos-1804\nenabled=1\ngpgcheck=0\n[mon]\name=mon\nbaseurl=ftp://${i}/ceph/MON\ngpgcheck=0\n[osd]\nname=osd\nbaseurl=ftp://${i}/ceph/OSD\ngpgcheck=0\n[tools]\nname=tools\nbaseurl=ftp://${i}/ceph/Tools\ngpgcheck=0" > /etc/yum.repos.d/linux.repo
 fi

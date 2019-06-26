@@ -4,6 +4,9 @@ read -p "输入虚拟机号码  " clone
 read -p "输入要配置的网卡/eth0/eth1/eth2/eth3/  " eth
 read -p "输入要配置的ip  " ip 
 read -p "要修改的主机名  " hs
+function yum{
+  rm -rf /etc/yum.repos.d/*
+  
 
 #检测真机有没有expect
 ex=`rpm -qa expect`

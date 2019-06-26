@@ -38,8 +38,10 @@ sed -i "70s/.*/bind ${ip}/" /etc/redis/${rd}.conf
 sed -i "93s/.*/port ${rd}/" /etc/redis/${rd}.conf
 if [ ${y} == y ];then
   sed -i "501s/.*/requirepass ${mi}/" /etc/redis/${rd}.conf
+  sed -i '43s/.*/            $CLIEXEC -h '${ip}' -p '${rd}'  -a '${mi}' shutdown/' /etc/init.d/redis_${rd}
+else
+  sed -i  '43s/.*/            $CLIEXEC -h '${ip}' -p '${rd}'  shutdown/' /etc/init.d/redis_${rd}
 fi
-sed -i  '43s/.*/            $CLIEXEC -h '${ip}' -p '${rd}'  shutdown/' /etc/init.d/redis_${rd}
 #集群配置
 #rm -rf /var/lib/redis/${rd}/*
 #sed -i  '815s/.*/cluster-enabled yes/' /etc/redis/${rd}.conf
