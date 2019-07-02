@@ -1,5 +1,13 @@
 #!/bin/bash
 #Function:一键配置ip和搭建yum
+wd(){
+ip01=`echo ${ip:0:3}`
+ip02=`echo ${ip:4:3}`
+ip03=`echo ${ip:8:1}`
+eip=${ip01}.${ip02}.${ip03}.254
+sip=`grep baseurl /etc/yum.repos.d/local.repo | awk -F "/" '{print $3}'` &> /dev/null
+sed -i "/baseurl/s/${sip}/${eip}/" /etc/yum.repos.d/local.repo
+}
 read -p "请输入要配置的网卡(eth0/eth1/eth2/eth3):"  et
 read -p "请输入要配置的IP地址:"  ip
 read -p "请输入网关(可不填):" w
@@ -14,13 +22,5 @@ else
 #激活网卡
   nmcli connection up "${et}"
 fi
-#清空yum仓库,以免影响正确配置
-read -p "yum库ftp的ip地址(例:192.168.4.254)(可不填):" i
-if [ -z $i ];then
-  echo "不设置，yum可能会有点问题哦，建议yum repolist查看"
-else
-  rm -rf /etc/yum.repos.d/*
-  wd=`echo ${ip:8:1}`
 #配置yum仓库
-  echo -e "[redhat]\nname=redhat\nbaseurl=ftp://192.168.${wd}.254/centos-1804\nenabled=1\ngpgcheck=0\n[mon]\name=mon\nbaseurl=ftp://${i}/ceph/MON\ngpgcheck=0\n[osd]\nname=osd\nbaseurl=ftp://${i}/ceph/OSD\ngpgcheck=0\n[tools]\nname=tools\nbaseurl=ftp://${i}/ceph/Tools\ngpgcheck=0" > /etc/yum.repos.d/linux.repo
-fi
+   wd
